@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do_bloc/add_to_do.dart';
+import 'package:to_do_bloc/cubit/todo_cubit.dart';
 import 'package:to_do_bloc/todo_list.dart';
 
 void main() {
@@ -20,11 +22,16 @@ class MyToDoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      routes: {
-        '/addtodo': (context) => const AddToDo(),
-      },
-      home: const TodoList(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => TodoCubit()),
+      ],
+      child: MaterialApp(
+        routes: {
+          '/addtodo': (context) => const AddToDo(),
+        },
+        home: const TodoList(),
+      ),
     );
   }
 }

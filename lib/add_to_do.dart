@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:to_do_bloc/cubit/todo_cubit.dart';
 
 class AddToDo extends StatelessWidget {
   const AddToDo({super.key});
@@ -20,16 +22,28 @@ class AddToDo extends StatelessWidget {
           padding: const EdgeInsets.all(10.0),
           child: SingleChildScrollView(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextField(
-                  controller: addToDoController,
-                  decoration:
-                      const InputDecoration(border: OutlineInputBorder()),
+                SizedBox(
+                  width: 500,
+                  child: TextField(
+                    controller: addToDoController,
+                    decoration: const InputDecoration(
+                        hintText: "Enter new to-do",
+                        border: OutlineInputBorder()),
+                  ),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                ElevatedButton(onPressed: () {}, child: const Text("Add"))
+                ElevatedButton(
+                    onPressed: () {
+                      context
+                          .read<TodoCubit>()
+                          .addToDo(title: addToDoController.text.trim());
+                      addToDoController.text = "";
+                    },
+                    child: const Text("Add"))
               ],
             ),
           ),
