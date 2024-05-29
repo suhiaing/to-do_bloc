@@ -18,11 +18,10 @@ class AddToDo extends StatelessWidget {
               icon: const Icon(Icons.arrow_back)),
           title: const Text("Add todo"),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(10.0),
+        body: Center(
           child: SingleChildScrollView(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
                   width: 500,
